@@ -26,7 +26,7 @@ sendRequest('https://rinh-api.kovalev.team/employee/find-by-department/31')
         let counter = 0;
         workers.forEach(worker => {
             sendRequest(`https://rinh-api.kovalev.team/publication/employee/findByEmployeeId?employeeId=${worker.id}&startYear=1900&endYear=${currentYear}`)
-                .then(workerArticles => {
+                .then(async workerArticles => {
                     let citiedCount = 0;
                     let mostCitied = {};
                     workerArticles.articleInfo.forEach((article) => {
@@ -56,6 +56,9 @@ sendRequest('https://rinh-api.kovalev.team/employee/find-by-department/31')
                         avatarUrl: workerArticles.employee.avatarUrl,
                         allCitied: citiedCount,
                         mostCitied: mostCitied,
+                        commonWorkExperience: workerArticles.employee.commonWorkExperience,
+                        academicDegreeId: workerArticles.employee.academicDegreeId,
+                        positionId: workerArticles.employee.positionId,
                     }
                     staff.push(employee);
                     if (!articles.length) {
